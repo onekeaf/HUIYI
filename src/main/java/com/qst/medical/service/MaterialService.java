@@ -67,6 +67,16 @@ public class MaterialService {
     }
 
     /**
+     * 获取前4条必备材料（用于数据面板展示）
+     */
+    public List<MaterialModel> getFirstMaterialWithPage() {
+        PageHelper.startPage(1, 4);
+        List<MaterialModel> list = materialMapper.getAllMaterial(new MaterialParam());
+        PageInfo<MaterialModel> info = new PageInfo<>(list, 4);
+        return info.getList();
+    }
+
+    /**
      * 根据id删除必备材料
      */
     public Msg deleteMaterial(Long id) {

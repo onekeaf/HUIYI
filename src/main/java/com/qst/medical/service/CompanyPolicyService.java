@@ -67,6 +67,16 @@ public class CompanyPolicyService {
     }
 
     /**
+     * 获取前4条医药公司政策（用于数据面板展示）
+     */
+    public List<CompanyPolicyModel> getFirstPolicyWithPage() {
+        PageHelper.startPage(1, 4);
+        List<CompanyPolicyModel> list = companyPolicyMapper.getAllPolicy(new CompanyPolicyParam());
+        PageInfo<CompanyPolicyModel> info = new PageInfo<>(list, 4);
+        return info.getList();
+    }
+
+    /**
      * 根据id删除医药公司政策
      */
     public Msg deletePolicy(Long id) {

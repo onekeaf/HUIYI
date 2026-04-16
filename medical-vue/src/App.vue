@@ -6,8 +6,13 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+  mounted() {
+    if (localStorage.getItem("userInfo")) {
+      this.$store.dispatch("app/setMenuList");
+    }
+  },
+};
 </script>
 
 <style>

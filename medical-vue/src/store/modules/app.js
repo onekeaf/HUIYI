@@ -1,13 +1,22 @@
 import { login } from "../../api/Login";
 import { Message } from "element-ui";
+import router, { constantRoutes } from "../../router/index";
+import { getMenu } from "../../utils/routeParse";
 
 const state = {
   token: "",
+  menuList: [],
 };
 
 const mutations = {
   SET_TOKEN(state, payload) {
     state.token = payload;
+  },
+  SET_ROUTER_MENULIST(state, payload) {
+    const array = constantRoutes.concat(payload);
+    state.menuList = array;
+    router.options.routes = array;
+    router.addRoutes([...array]);
   },
 };
 
@@ -32,6 +41,15 @@ const actions = {
         } else {
           reject();
         }
+      });
+    });
+  },
+  // 获取后端传来的路由列表
+  setMenuList({ commit }) {
+    return new Promise((resolve) => {
+      getMenu().then((res) => {
+        commit("SET_ROUTER_MENULIST", res);
+        resolve(res);
       });
     });
   },

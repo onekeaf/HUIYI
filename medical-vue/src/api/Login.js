@@ -8,3 +8,13 @@ export function login(username, password) {
     data: Qs.stringify({ username, password }),
   });
 }
+
+export function getMenuList(roleName) {
+  return request({
+    url: "/permissions",
+    method: "GET",
+    params: {
+      roleName,
+    },
+  });
+}

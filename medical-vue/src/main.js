@@ -15,6 +15,22 @@ Vue.use(ElementUI)
 Vue.use(Fragment.Plugin)
 Vue.prototype._ = _
 
+Vue.mixin({
+  computed: {
+    hasRole() {
+      if (localStorage.getItem("userInfo")) {
+        if (JSON.parse(localStorage.getItem("userInfo")).utype == 1) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    },
+  },
+});
+
 new Vue({
   router,
   store,
