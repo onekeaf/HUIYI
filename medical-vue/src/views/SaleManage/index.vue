@@ -217,6 +217,7 @@ export default {
       rules,
       visualization: false,
       map: null,
+      mapLoaded: false,
       addStatus: 0,
       markers: [],
       address: "",
@@ -411,13 +412,22 @@ export default {
         });
     },
   },
+  watch: {
+    visualization(newVal) {
+      if (newVal && !this.mapLoaded) {
+        this.$nextTick(() => {
+          this.loadMap();
+          this.mapLoaded = true;
+          setTimeout(() => {
+            this.refreshMap();
+          }, 3000);
+        });
+      }
+    },
+  },
   mounted() {
     this.getSalePlaceInfo();
     this.getAllSalePlaceInfo();
-    this.loadMap();
-    setTimeout(() => {
-      this.refreshMap();
-    }, 3000);
   },
   computed: {
     ...mapGetters({
