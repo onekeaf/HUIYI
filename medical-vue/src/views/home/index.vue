@@ -99,8 +99,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import * as echarts from "echarts";
-import "echarts/extension/bmap/bmap";
+import echarts from "echarts";
 import { getAllDashboardInfo } from "../../api/admin/dashboardApi";
 
 export default {
